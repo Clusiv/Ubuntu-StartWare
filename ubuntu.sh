@@ -19,3 +19,14 @@ sudo apt install keepass2
 sudo apt install zsh
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 chsh -s /bin/zsh
+
+# For Telegram
+sudo apt-get install libsm6:i386 libice6:i386 libegl1:i386
+
+#KVM
+sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+
+#Ubuntu Tweak
+sudo apt install gnome-tweak-tool
+sudo apt install wmctrl
+
