@@ -1,32 +1,60 @@
-#Chrome:
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-sudo apt-get update
-sudo apt-get install google-chrome-stable
+# Start script with sudo
+# Add -y to apt commands
+# apt update then add another repo, then apt update again (need to test)
 
-#VS Code
+mkdir ~/Applications
+mkdir ~/Projects
+mkdir ~/Books
 
-#Terminator
-sudo apt install terminator
 
-#git
-sudo apt install git
+sudo apt update && sudo apt upgrade
+sudo apt install htop curl python3-venv python3-pip wine vlc git
 
-#keepass2
-sudo apt install keepass2
+cd Downloads
 
-#zsh
-sudo apt install zsh
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-chsh -s /bin/zsh
+# Chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i --force-depends google-chrome-stable_current_amd64.deb
 
-# For Telegram
-sudo apt-get install libsm6:i386 libice6:i386 libegl1:i386
+# qBittorent
+sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable
+sudo apt-get update && sudo apt-get install qbittorrent
 
-#KVM
-sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virt-manager
+# Telegram
+wget https://telegram.org/dl/desktop/linux
+tar xf linux
+mv Telegram ~/Applications
+~/Applications/Telegram/Telegram
 
-#Ubuntu Tweak
-sudo apt install gnome-tweak-tool
-sudo apt install wmctrl
+# VS Code
+sudo apt install software-properties-common apt-transport-https wget
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt update && sudo apt install code
 
+code --install-extension ms-python.python
+code --install-extension hookyqr.beautify
+
+# Installing Linter
+#/usr/bin/python3 /home/imran/.vscode/extensions/ms-python.python-2021.1.502429796/pythonFiles/pyvsc-run-isolated.py pip install -U pylint --user
+pip install -U pylint --user
+
+# MassCode | Edit version if needed
+wget https://github.com/antonreshetov/massCode/releases/download/v1.3.0/massCode-1.3.0.AppImage
+
+# PostgreSQL and PGAdmin
+sudo apt install postgresql-12
+curl https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo apt-key add
+sudo sh -c 'echo "deb https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+sudo apt install pgadmin4
+
+# GDrive API for file downloading
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+
+# Download keepass-db, massdrop-db, books, ssh-keys
+
+# To up micro
+sudo apt-get install alsa-tools-gui
+# Works only for hp laptop 
+# Device Blakc Mic, Front side.
+# Override => Microphone. Install boot override
